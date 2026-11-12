@@ -1,0 +1,313 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   FORGE design system — semantic tokens
+   Dark is the signature theme; light is separately art-directed (not inverted).
+   ========================================================================== */
+
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #0a0e13;
+  --base: #101720;
+  --raised: #17212b;
+  --panel: #1c2934;
+  --ink: #f0f4f5;
+  --ink-2: #9aa8b2;
+  --ink-3: #6f808c;
+  --line: #293642;
+  --line-2: #3a4a58;
+  --forge: #ff7a36;
+  --forge-ink: #1a0d05;
+  --forge-text: #ff8d52;
+  --amber: #eab85c;
+  --ok: #55d6a3;
+  --info: #61c8e8;
+  --danger: #f16b70;
+  --grid: rgb(154 168 178 / 0.055);
+  --overlay: rgb(4 7 10 / 0.72);
+  --shadow: 0 18px 50px -12px rgb(0 0 0 / 0.65), 0 0 0 1px rgb(255 255 255 / 0.03);
+  /* Chart series (identity). Status colours above are never used as series. */
+  --c1: #ff7a36;
+  --c2: #61c8e8;
+  --c3: #9b7df0;
+  --c4: #b4ba45;
+  --c5: #4e8fe0;
+  --c6: #d4649f;
+  --c-muted: #56677a;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --canvas: #efece6;
+  --base: #f8f6f2;
+  --raised: #ffffff;
+  --panel: #f1eee8;
+  --ink: #171c22;
+  --ink-2: #47525d;
+  --ink-3: #66717b;
+  --line: #d8d3ca;
+  --line-2: #bdb6aa;
+  --forge: #d4500f;
+  --forge-ink: #ffffff;
+  --forge-text: #b8430a;
+  --amber: #9a6200;
+  --ok: #0c7d55;
+  --info: #0a7397;
+  --danger: #c2353c;
+  --grid: rgb(23 28 34 / 0.05);
+  --overlay: rgb(30 28 24 / 0.45);
+  --shadow: 0 18px 44px -14px rgb(40 34 24 / 0.28), 0 0 0 1px rgb(23 28 34 / 0.04);
+  --c1: #d9541a;
+  --c2: #1487b0;
+  --c3: #6d4fd0;
+  --c4: #7a8a12;
+  --c5: #2f5fc0;
+  --c6: #c2408a;
+  --c-muted: #9aa1a8;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-base: var(--base);
+  --color-raised: var(--raised);
+  --color-panel: var(--panel);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-forge: var(--forge);
+  --color-forge-ink: var(--forge-ink);
+  --color-forge-text: var(--forge-text);
+  --color-amber: var(--amber);
+  --color-ok: var(--ok);
+  --color-info: var(--info);
+  --color-danger: var(--danger);
+  --color-overlay: var(--overlay);
+
+  --font-sans: var(--font-manrope), var(--font-plex-arabic), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), var(--font-plex-arabic), ui-monospace, "SFMono-Regular", monospace;
+  --font-display: var(--font-display-latin), var(--font-plex-arabic), ui-sans-serif, sans-serif;
+
+  --radius-xs: 2px;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+
+  --shadow-pop: var(--shadow);
+
+  --ease-forge: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+  --animate-sweep: sweep 1.6s linear infinite;
+  --animate-rise: rise 0.32s var(--ease-forge) both;
+  --animate-fade: fade 0.2s ease-out both;
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+  @keyframes sweep {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  html {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scrollbar-color: var(--line-2) transparent;
+    scrollbar-width: thin;
+  }
+  body {
+    min-height: 100dvh;
+    background: var(--canvas);
+    overflow-x: hidden;
+  }
+  /* Arabic: slightly larger for legibility and never letter-spaced (it breaks joining). */
+  html[lang="ar"] {
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  html[lang="ar"] * {
+    letter-spacing: 0 !important;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--forge) 35%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--forge);
+    outline-offset: 2px;
+  }
+  button, [role="button"], a, select, summary, label[for] {
+    cursor: pointer;
+  }
+  button:disabled, [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+  input[type="number"]::-webkit-inner-spin-button { opacity: 0.4; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: var(--line); border: 2px solid var(--canvas); border-radius: 6px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--line-2); }
+}
+
+/* ==========================================================================
+   Components
+   ========================================================================== */
+
+@layer components {
+  /* Technical micro-label: mono, uppercase, tracked. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    line-height: 1.3;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  html[lang="ar"] .label {
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    font-weight: 500;
+  }
+  /* Identifiers and codes always read left-to-right, even inside Arabic text. */
+  .code {
+    font-family: var(--font-mono);
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .num {
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+  }
+  .display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    line-height: 1;
+  }
+  html[lang="ar"] .display {
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .panel {
+    background: var(--base);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+  }
+  /* Engineering grid backdrop for hero bands and the twin. */
+  .grid-bg {
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  /* Corner ticks: the FORGE framing motif. */
+  .ticks {
+    position: relative;
+  }
+  .ticks::before,
+  .ticks::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-color: var(--forge);
+    border-style: solid;
+    pointer-events: none;
+  }
+  .ticks::before { top: -1px; inset-inline-start: -1px; border-width: 1px 0 0 1px; }
+  .ticks::after { bottom: -1px; inset-inline-end: -1px; border-width: 0 1px 1px 0; }
+  html[dir="rtl"] .ticks::before { border-width: 1px 1px 0 0; }
+  html[dir="rtl"] .ticks::after { border-width: 0 0 1px 1px; }
+
+  .field {
+    width: 100%;
+    height: 34px;
+    padding: 0 10px;
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    color: var(--ink);
+    font-size: 13px;
+    transition: border-color 0.12s, box-shadow 0.12s;
+  }
+  textarea.field { height: auto; padding: 8px 10px; line-height: 1.5; }
+  .field::placeholder { color: var(--ink-3); }
+  .field:hover { border-color: var(--line-2); }
+  .field:focus { outline: none; border-color: var(--forge); box-shadow: 0 0 0 3px color-mix(in srgb, var(--forge) 22%, transparent); }
+  .field[aria-invalid="true"] { border-color: var(--danger); }
+  .field:disabled { opacity: 0.55; }
+  select.field {
+    appearance: none;
+    padding-inline-end: 28px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa8b2' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 9px center;
+  }
+  html[dir="rtl"] select.field { background-position: left 9px center; }
+  select.field option { background: var(--raised); color: var(--ink); }
+
+  /* Recharts: keep its chrome on our tokens. */
+  .recharts-wrapper { font-family: var(--font-sans); }
+  .recharts-cartesian-axis-tick-value { fill: var(--ink-3); font-size: 11px; font-variant-numeric: tabular-nums; }
+  .recharts-cartesian-grid line { stroke: var(--line); stroke-opacity: 0.7; }
+  .recharts-surface:focus, .recharts-wrapper:focus, .recharts-wrapper *:focus { outline: none; }
+}
+
+/* ==========================================================================
+   Motion & print
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+@media print {
+  :root, :root[data-theme="dark"], :root[data-theme="light"] {
+    --canvas: #fff; --base: #fff; --raised: #fff; --panel: #f4f4f4;
+    --ink: #000; --ink-2: #333; --ink-3: #555; --line: #bbb; --line-2: #888;
+    --forge: #c4470a; --forge-text: #c4470a; --ok: #0c7d55; --danger: #b3261e; --amber: #8a5800; --info: #0a6485;
+  }
+  html, body { background: #fff !important; font-size: 11px; }
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  .print-area { position: static !important; overflow: visible !important; padding: 0 !important; margin: 0 !important; }
+  @page { margin: 14mm; }
+}
+.print-only { display: none; }
