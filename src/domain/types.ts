@@ -89,6 +89,10 @@ export interface ProductionLine {
   shiftOutput: number;
   shiftRejected: number;
   shiftDowntimeMin: number;
+  /** Totals from earlier shifts of the current production day (06:00 → 06:00). */
+  dayCarryOutput?: number;
+  dayCarryRejected?: number;
+  dayCarryDowntimeMin?: number;
   supervisorId: ID;
 }
 

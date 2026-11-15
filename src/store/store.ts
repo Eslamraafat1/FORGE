@@ -353,7 +353,17 @@ export const useForge = create<ForgeState>()(
             w.tick += 1;
             const shift = shiftAt(w.now);
             if (shift.id !== prevShift) {
-              w.lines = w.lines.map((ln) => ({ ...ln, shiftOutput: 0, shiftRejected: 0, shiftDowntimeMin: 0 }));
+              // Roll the finished shift into the production-day totals (a new day starts with shift A).
+              const newDay = shift.id === "A";
+              w.lines = w.lines.map((ln) => ({
+                ...ln,
+                dayCarryOutput: newDay ? 0 : (ln.dayCarryOutput ?? 0) + ln.shiftOutput,
+                dayCarryRejected: newDay ? 0 : (ln.dayCarryRejected ?? 0) + ln.shiftRejected,
+                dayCarryDowntimeMin: newDay ? 0 : (ln.dayCarryDowntimeMin ?? 0) + ln.shiftDowntimeMin,
+                shiftOutput: 0,
+                shiftRejected: 0,
+                shiftDowntimeMin: 0,
+              }));
               log(w, "system", "info", { key: "evt.shiftChanged", params: { shift: `@shift.${shift.id}` } }, undefined, { actor: null });
             }
             for (const line of w.lines) {
