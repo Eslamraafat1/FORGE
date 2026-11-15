@@ -15,6 +15,7 @@ export const coreAr: Record<keyof typeof coreEn, string> = {
   "nav.overview": "نظرة عامة",
   "nav.factory": "التوأم الرقمي",
   "nav.operations": "العمليات المباشرة",
+  "nav.operationsShort": "العمليات",
   "nav.production": "خطوط الإنتاج",
   "nav.workOrders": "أوامر العمل",
   "nav.planning": "تخطيط الإنتاج",

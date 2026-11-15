@@ -14,6 +14,7 @@ export const coreEn = {
   "nav.overview": "Overview",
   "nav.factory": "Digital Twin",
   "nav.operations": "Live Operations",
+  "nav.operationsShort": "Operations",
   "nav.production": "Production Lines",
   "nav.workOrders": "Work Orders",
   "nav.planning": "Production Planning",

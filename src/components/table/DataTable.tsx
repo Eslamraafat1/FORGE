@@ -254,7 +254,7 @@ export function DataTable<T>({
       )}
 
       {/* Desktop table */}
-      <div className="hidden min-w-0 overflow-x-auto md:block">
+      <div className="relative hidden min-w-0 overflow-x-auto md:block">
         <table className="w-full border-collapse text-[13px]">
           <caption className="sr-only">{caption}</caption>
           <thead>

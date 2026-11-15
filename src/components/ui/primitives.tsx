@@ -139,7 +139,8 @@ export function Tooltip({ label, children, side = "bottom", className }: { label
         role="presentation"
         aria-hidden
         className={cn(
-          "pointer-events-none absolute z-50 whitespace-nowrap rounded-sm border border-line-2 bg-panel px-2 py-1 text-[11px] font-medium text-ink opacity-0 shadow-pop transition-opacity delay-300 duration-100 group-focus-within/tt:opacity-100 group-hover/tt:opacity-100",
+          // display:none at rest so hidden tooltips never add scrollable overflow.
+          "pointer-events-none absolute z-50 hidden animate-fade whitespace-nowrap rounded-sm border border-line-2 bg-panel px-2 py-1 text-[11px] font-medium text-ink shadow-pop group-focus-within/tt:block group-hover/tt:block",
           side === "bottom" && "start-1/2 top-full mt-1.5 -translate-x-1/2 rtl:translate-x-1/2",
           side === "top" && "bottom-full start-1/2 mb-1.5 -translate-x-1/2 rtl:translate-x-1/2",
           side === "end" && "start-full top-1/2 ms-2 -translate-y-1/2",
@@ -211,7 +212,7 @@ export function Panel({
   return (
     <Tag className={cn("panel flex min-w-0 flex-col", className)} aria-labelledby={title ? id : undefined}>
       {(title || actions) && (
-        <header className="flex min-h-[46px] flex-wrap items-center justify-between gap-x-3 gap-y-2 border-b border-line px-4 py-2">
+        <header className="flex min-h-[46px] min-w-0 flex-wrap items-center justify-between gap-x-3 gap-y-2 border-b border-line px-4 py-2">
           <div className="min-w-0">
             {eyebrow && <div className="label mb-0.5">{eyebrow}</div>}
             {title && (
@@ -221,7 +222,7 @@ export function Panel({
             )}
             {subtitle && <p className="mt-0.5 text-[12px] text-ink-3">{subtitle}</p>}
           </div>
-          {actions && <div className="flex flex-wrap items-center gap-1.5">{actions}</div>}
+          {actions && <div className="flex min-w-0 max-w-full flex-wrap items-center gap-1.5">{actions}</div>}
         </header>
       )}
       <div className={cn("min-w-0 flex-1", !flush && "p-4", bodyClassName)}>{children}</div>

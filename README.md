@@ -8,7 +8,7 @@
 
 A complete, multi-page enterprise application for manufacturing operations — MES, ERP, IIoT monitoring, a 3D factory digital twin, planning, inventory, quality, maintenance and analytics — running on a deterministic simulated factory network.
 
-**[Live demo → LIVE_URL](LIVE_URL)**
+**[Live demo → https://forge-platform-liart.vercel.app](https://forge-platform-liart.vercel.app)**
 
 ![Overview — executive command center](docs/screenshots/overview-dark.png)
 
@@ -61,7 +61,8 @@ One store is the single source of truth, and every change goes through an action
 The dataset is generated from a fixed seed anchored to a simulated clock (no `Math.random`, no wall-clock reads in business logic), so every figure is reproducible. OEE is always aggregated from raw inputs — Availability × Performance × Quality — never averaged from percentages. A consistency script verifies referential integrity and invariants:
 
 ```bash
-npx tsx scripts/check-data.mts
+npm run check:data        # referential integrity and dataset invariants
+npm run check:workflows   # 190 assertions against the real store: lifecycles, cascades, determinism
 ```
 
 See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for structure and conventions.

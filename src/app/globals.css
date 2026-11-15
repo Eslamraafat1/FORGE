@@ -86,9 +86,12 @@
   --color-danger: var(--danger);
   --color-overlay: var(--overlay);
 
-  --font-sans: var(--font-manrope), var(--font-plex-arabic), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), var(--font-plex-arabic), ui-monospace, "SFMono-Regular", monospace;
-  --font-display: var(--font-display-latin), var(--font-plex-arabic), ui-sans-serif, sans-serif;
+  /* Families are named explicitly (not via the next/font variables): those variables append a
+     metric "Fallback" face that covers every code point and would capture Arabic text before
+     IBM Plex Sans Arabic. The faces themselves are registered by next/font in app/layout.tsx. */
+  --font-sans: "Manrope", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", "IBM Plex Sans Arabic", ui-monospace, "SFMono-Regular", monospace;
+  --font-display: "Barlow Condensed", "IBM Plex Sans Arabic", ui-sans-serif, sans-serif;
 
   --radius-xs: 2px;
   --radius-sm: 2px;
@@ -151,6 +154,11 @@
   }
   html[lang="ar"] * {
     letter-spacing: 0 !important;
+  }
+  /* Scroll containers contain their absolutely-positioned descendants (sr-only text,
+     tooltips), so those can never widen the page. Utilities still override this. */
+  :where(.overflow-x-auto, .overflow-y-auto, .overflow-auto) {
+    position: relative;
   }
   ::selection {
     background: color-mix(in srgb, var(--forge) 35%, transparent);

@@ -124,7 +124,7 @@ export function Kpi({
   const body = (
     <>
       <div className="flex items-center justify-between gap-2">
-        <span className="label truncate">{label}</span>
+        <span className="label">{label}</span>
         {Icon && <Icon aria-hidden className="size-3.5 shrink-0 text-ink-3" />}
       </div>
       <div className="mt-2 flex items-end justify-between gap-3">

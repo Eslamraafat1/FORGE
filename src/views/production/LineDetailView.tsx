@@ -10,7 +10,7 @@ import { DAY, shiftAt } from "@/lib/time";
 import { useForge } from "@/store/store";
 import { lineLive } from "@/store/selectors";
 import { Badge, Button, Code, EmptyState, Gauge, Panel, Progress, SimBadge, cn, toneText } from "@/components/ui/primitives";
-import { EntityLink, EntityNotFound, Guard, Member, Page, PageHeader, useLookup } from "@/components/ui/page";
+import { EntityLink, EntityNotFound, Guard, Page, PageHeader, useLookup } from "@/components/ui/page";
 import { SEVERITY_TONE, StatusBadge } from "@/components/ui/status";
 import { DataTable, type Column } from "@/components/table/DataTable";
 import { LineCharts } from "./LineCharts";

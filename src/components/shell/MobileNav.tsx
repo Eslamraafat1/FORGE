@@ -13,7 +13,7 @@ import { NAV, isActive, type NavItem } from "./nav";
 /** The four destinations a floor user needs one tap away; everything else lives in the sheet. */
 const TABS: NavItem[] = [
   { href: "/overview", label: "nav.overview", icon: LayoutDashboard },
-  { href: "/operations", label: "nav.operations", icon: Activity },
+  { href: "/operations", label: "nav.operationsShort", icon: Activity },
   { href: "/work-orders", label: "nav.workOrders", icon: ClipboardList },
   { href: "/inventory", label: "nav.inventory", icon: Boxes },
 ];

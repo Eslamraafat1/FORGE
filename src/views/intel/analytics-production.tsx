@@ -234,10 +234,9 @@ export function DowntimeSection({ scope }: { scope: AnalyticsScope }) {
   const share = ratio(minutes, total.plannedMin);
   const prevShare = prev && prevMinutes !== null ? ratio(prevMinutes, prev.plannedMin) : null;
 
-  const byMachine = useMemo(() => sumBy(events, (e) => e.machineId, (e) => e.minutes), [events]);
-  const machineRows = useMemo<RankRow[]>(
-    () =>
-      byMachine.slice(0, TOP_MACHINES).map((r) => {
+  // Cheap derivations over a few hundred events: computed inline, no memoisation needed.
+  const byMachine = sumBy(events, (e) => e.machineId, (e) => e.minutes);
+  const machineRows: RankRow[] = byMachine.slice(0, TOP_MACHINES).map((r) => {
         const mc = lookup.machine(r.key);
         const count = events.filter((e) => e.machineId === r.key).length;
         return {
@@ -252,23 +251,17 @@ export function DowntimeSection({ scope }: { scope: AnalyticsScope }) {
           value: r.value,
           hint: t("analytics.down.machineHint", { n: fmt.num(count), line: mc?.lineId ?? "", share: fmt.pct(ratio(r.value, minutes)) }),
         };
-      }),
-    [byMachine, events, lookup, tl, t, fmt, minutes],
-  );
+      });
 
-  const byCause = useMemo(() => sumBy(events, (e) => e.cause, (e) => e.minutes), [events]);
-  const causeRows = useMemo<RankRow[]>(
-    () =>
-      byCause.map((r) => ({
+  const byCause = sumBy(events, (e) => e.cause, (e) => e.minutes);
+  const causeRows: RankRow[] = byCause.map((r) => ({
         key: r.key,
         text: td(`cause.${r.key}`),
         label: td(`cause.${r.key}`),
         value: r.value,
         color: causeColor(r.key as DowntimeCause),
         hint: t("analytics.down.causeHint", { n: fmt.num(events.filter((e) => e.cause === r.key).length), share: fmt.pct(ratio(r.value, minutes)) }),
-      })),
-    [byCause, events, td, t, fmt, minutes],
-  );
+      }));
 
   // One row per production day in the window (days without stops stay at zero).
   const trend = useMemo(() => {
